@@ -1,7 +1,9 @@
 # Code Challenge
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.15. 
+
 The Project is an example of using REST-API `http://dummy.restapiexample.com/` to List, add, edit and remove an employ.
+
 This project is Hosted publiclly free AWS under `https://`  
 
 ## Libraries
