@@ -10,7 +10,7 @@ This project is Hosted publiclly free AWS under `https://`
 
 - [Angular 9.1](https://angular.io/) As a development freamwork.
 - [mdbootstrap](https://mdbootstrap.com/docs/angular/getting-started/quick-start/) for Material Design UI/UX.
-- [postcss with autoprefixer ](https://github.com/valor-software/ng2-charts) fo add vendor prefixes to CSS rules.
+- [postcss with autoprefixer ](https://github.com/valor-software/ng2-charts) for add vendor prefixes to CSS rules.
 - [ESlint] As TSlint is deprecated https://blog.palantir.com/tslint-in-2019-1a144c2317a9
 
 ## Installation

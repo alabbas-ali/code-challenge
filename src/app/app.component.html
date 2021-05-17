@@ -1,52 +1,5 @@
 
-<!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white">
-
-    <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" href="#">Code Chanllange</a></mdb-navbar-brand>
-
-    <!-- Collapsible content -->
-    <links>
-
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbWavesEffect>Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
-            </li>
-
-            <!-- Dropdown -->
-            <li class="nav-item dropdown" dropdown>
-                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-                Basic dropdown<span class="caret"></span></a>
-                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
-                    <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-                </div>
-            </li>
-
-        </ul>
-        <!-- Links -->
-
-        <!-- Search form -->
-        <form class="form-inline waves-light" mdbWavesEffect>
-            <div class="md-form my-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            </div>
-        </form>
-    </links>
-    <!-- Collapsible content -->
-
-</mdb-navbar>
-<!--/.Navbar-->
+<app-header></app-header>
 
 <main class="mx-lg-5">
     <div class="mt-5">
@@ -54,43 +7,4 @@
     </div>
 </main>
 
-<footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow" >
-    <!-- <div class="pt-4">
-        <a class="btn btn-outline-white" href="#" role="button" target="_blank"> 
-            <i class="fa fa-download ml-2"></i>
-        </a>
-        <a class="btn btn-outline-white" href="#" role="button" target="_blank">
-            <i class="fa fa-graduation-cap ml-2"></i>
-        </a>
-    </div> -->
-    <hr class="my-4">
-    <div class="pb-4">
-        <a href="" target="_blank">
-            <i class="fa fa-facebook mr-3"></i>
-        </a>
-        <a href="" target="_blank">
-            <i class="fa fa-twitter mr-3"></i>
-        </a>
-        <a href="" target="_blank">
-            <i class="fa fa-youtube mr-3"></i>
-        </a>
-        <a href="" target="_blank">
-            <i class="fa fa-google-plus mr-3"></i>
-        </a>
-        <a href="" target="_blank">
-            <i class="fa fa-dribbble mr-3"></i>
-        </a>
-        <a href="" target="_blank">
-            <i class="fa fa-pinterest mr-3"></i>
-        </a>
-        <a href="" target="_blank">
-            <i class="fa fa-github mr-3"></i>
-        </a>
-        <a href="" target="_blank">
-            <i class="fa fa-codepen mr-3"></i>
-        </a>
-    </div>
-    <div class="footer-copyright py-3">
-        © 2021 Copyright: <a  href="" target="_blank"> Alabbas Alhaj Ali </a>
-    </div>
-</footer>
+<app-footer></app-footer>
