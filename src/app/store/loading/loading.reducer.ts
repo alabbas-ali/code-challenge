@@ -1,9 +1,9 @@
-import { Actions, SetLoading } from './loading.actions'
+import { AllLoadingActions, Actions } from './loading.actions'
 
 /**
  * The application loading state interface definition 
  */
-export interface LoadingState {
+ export interface LoadingState {
     loading: boolean
 }
 
@@ -11,19 +11,19 @@ export interface LoadingState {
  * The initial application loading state 
  * As the home page is loading the list the loading state should be initialize as true
  */
-const initialState: LoadingState = {
+ const initialState: LoadingState = {
     loading: true,
 }
 
-//type Action = AllActions
+type Action = AllLoadingActions
 
 /**
  * The loading state reducer
  * the reflication that each action is taking place in the application state
  */
-export function reducer(
+ export function reducer(
     state: LoadingState = initialState,
-    action: SetLoading,
+    action: Action,
 ): LoadingState {
     switch (action.type) {
         case Actions.SET_LOADING: return {

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { DataService } from '@@services/data.service'
-import { LoadingState } from '@@store/loading'
 import { Employee } from '@@model/employee'
+import { SetLoading , GetLoading } from '@@store/loading'
+import { CoreState } from '@@store/index'
 import { Observable } from 'rxjs'
 
 @Component({
@@ -14,21 +15,29 @@ export class HomeComponent implements OnInit {
 
     loading$: Observable<boolean>
     employees: Array<Employee>
+    loadingError: boolean = false
 
     constructor(
-        private store: Store<LoadingState>,
+        private store: Store<CoreState>,
         private data: DataService,
-    ) { 
-        this.loading$ = this.store.select('loading')
+    ) {
+        this.store
+            .select<boolean>(GetLoading)
+            .subscribe(loading => {
+                console.log(loading)
+            })
     }
 
     ngOnInit(): void { 
         this.data
             .getALL()
-            .subscribe((list:Array<Employee>): void => {    
+            .subscribe((list:Array<Employee>): void => {  
+                this.store.dispatch(new SetLoading(false))  
                 this.employees = list
             },
             (error: any) => {
+                this.store.dispatch(new SetLoading(false))
+                this.loadingError = true
                 console.log(error)
             }) 
     }
