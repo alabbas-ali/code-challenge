@@ -6,12 +6,15 @@ The Project is an example of using REST-API `http://dummy.restapiexample.com/` t
 
 This project is Hosted publiclly free AWS under `https://`  
 
+The application is using the tsconfig to define some application patches for including shortening
+
 ## Libraries
 
 - [Angular 9.1](https://angular.io/) As a development freamwork.
 - [mdbootstrap](https://mdbootstrap.com/docs/angular/getting-started/quick-start/) for Material Design UI/UX.
 - [postcss with autoprefixer ](https://github.com/valor-software/ng2-charts) for add vendor prefixes to CSS rules.
-- [ESlint] As TSlint is deprecated https://blog.palantir.com/tslint-in-2019-1a144c2317a9
+- [ESlint](https://blog.palantir.com/tslint-in-2019-1a144c2317a9) As TSlint is deprecated 
+- [@ngrx/store](https://ngrx.io/guide/store) for sharing controlled state container in the application and reaction between components.
 
 ## Installation
 

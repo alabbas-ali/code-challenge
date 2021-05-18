@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { DataService } from '@@services/data.service'
 import { LoadingState } from '@@store/loading'
+import { Employee } from '@@model/employee'
 import { Observable } from 'rxjs'
 
 @Component({
@@ -12,15 +13,25 @@ import { Observable } from 'rxjs'
 export class HomeComponent implements OnInit {
 
     loading$: Observable<boolean>
+    employees: Array<Employee>
 
     constructor(
         private store: Store<LoadingState>,
         private data: DataService,
     ) { 
-        this.loading$ = store.select('loading')
+        this.loading$ = this.store.select('loading')
     }
 
-    ngOnInit(): void { }
+    ngOnInit(): void { 
+        this.data
+            .getALL()
+            .subscribe((list:Array<Employee>): void => {    
+                this.employees = list
+            },
+            (error: any) => {
+                console.log(error)
+            }) 
+    }
 
     showDetail(item: any) {
 

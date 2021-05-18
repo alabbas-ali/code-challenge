@@ -4,7 +4,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md'
 
 import { AppHeaderComponent } from './header/header.component'
 import { AppFooterComponent } from './footer/footer.component'
-import { AppRoutingModule } from '../app-routing.module'
+import { CommonModule } from '@angular/common'
 
 @NgModule({
     declarations: [
@@ -12,10 +12,11 @@ import { AppRoutingModule } from '../app-routing.module'
         AppFooterComponent
     ],
     imports: [
-        AppRoutingModule,
+        CommonModule,
         MDBBootstrapModule.forRoot(),
     ],
     exports: [
+        CommonModule,
         AppHeaderComponent,
         AppFooterComponent
     ],
