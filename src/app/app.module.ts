@@ -11,6 +11,7 @@ import { SharedComponentsModule } from '@@components/components.module'
 import { AppComponent } from './app.component'
 import { reducers } from '@@store/index'
 import { environment } from '../environments/environment'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
     imports: [
         CommonModule,
         BrowserModule,
+        BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(routes),
         StoreModule.forRoot({}),
