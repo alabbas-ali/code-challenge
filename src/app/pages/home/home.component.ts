@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
             .select<LoadingState>(GetLoadingState)
             .subscribe(state => {
                 this.loadingState = state
-                console.log('this state', this.loadingState)
             })
     }
 
@@ -33,12 +32,11 @@ export class HomeComponent implements OnInit {
         this.data
             .getALL()
             .subscribe((list:Array<Employee>): void => {  
-                this.store.dispatch(new SetLoading(false))  
+                this.store.dispatch(new SetLoading(false))
                 this.employees = list
             },
-            (error: any) => {
+            (_error: any) => {
                 this.store.dispatch(new SetLoadingError(true))
-                console.log(error)
             }) 
     }
 
