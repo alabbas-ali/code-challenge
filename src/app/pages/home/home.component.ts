@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
             .select<LoadingState>(GetLoadingState)
             .subscribe(state => {
                 this.loadingState = state
-                console.log('this state', this.loadingState)
             })
     }
 
@@ -38,7 +37,7 @@ export class HomeComponent implements OnInit {
             },
             (error: any) => {
                 this.store.dispatch(new SetLoadingError(true))
-                console.log(error)
+                console.log('error',  error)
             }) 
     }
 

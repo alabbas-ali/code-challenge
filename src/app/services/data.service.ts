@@ -80,7 +80,7 @@ export class DataService {
                 reportProgress: reportProgress,
             },
         ).pipe(map((responce: ApiResponce): Array<Employee> => {
-            console.log(responce)
+            console.log('responce', responce)
             if(responce.status !== 'success') throw new Error(`Error in retriving Employees`)
             return responce.data 
         }))
@@ -149,7 +149,7 @@ export class DataService {
                 reportProgress: reportProgress,
             },
         ).pipe(map((responce: ApiResponce): Employee => {
-            console.log(responce)
+            console.log('responce', responce)
             if(responce.status !== 'success') throw new Error(`Error in retriving Employee with id = ${id}`)
             return responce.data 
         }))

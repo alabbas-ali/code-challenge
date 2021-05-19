@@ -26,7 +26,7 @@ const routes: Routes = [
     ],
     imports: [
         CommonModule,
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'code-challenge-app' }),
         HttpClientModule,
         RouterModule.forRoot(routes),
         StoreModule.forRoot({}),

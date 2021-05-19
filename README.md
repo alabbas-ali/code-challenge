@@ -8,6 +8,8 @@ This project is Hosted publiclly free AWS under `https://`
 
 The application is using the tsconfig to define some application patches for including shortening
 
+This application is using Server-side Rendering as the application contains web pages with dynamic content with asynchronously fetched content.
+
 ## Libraries
 
 - [Angular 9.1](https://angular.io/) As a development freamwork.
@@ -20,17 +22,21 @@ The application is using the tsconfig to define some application patches for inc
 
 Run `npm i` to install all dependencies.
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Build 'Client-Side'
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Development server 'Client-Side'
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Development server
+
+Run `npm run build:ssr && npm run serve:ssr` for a dev server with serer side rendering and API serving. 
 
 ## Running unit tests
 
