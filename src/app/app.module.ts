@@ -29,14 +29,8 @@ const routes: Routes = [
         BrowserModule,
         HttpClientModule,
         RouterModule.forRoot(routes),
-        StoreModule.forRoot(reducers , {
-            // BIG TO DO after the Angular v9 upgrade : This is a temporary workaround but not a solution 
-            runtimeChecks: {
-                strictStateImmutability: false,
-                strictActionImmutability: false,
-            },
-        }),
-        // StoreModule.forFeature('core', reducers),
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('core', reducers),
         StoreDevtoolsModule.instrument({
             name: 'Code Challenge App',
             maxAge: 50,

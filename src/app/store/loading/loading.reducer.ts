@@ -5,6 +5,7 @@ import { AllLoadingActions, Actions } from './loading.actions'
  */
  export interface LoadingState {
     loading: boolean
+    error: boolean
 }
 
 /**
@@ -13,6 +14,7 @@ import { AllLoadingActions, Actions } from './loading.actions'
  */
  const initialState: LoadingState = {
     loading: true,
+    error: false,
 }
 
 type Action = AllLoadingActions
@@ -29,7 +31,15 @@ type Action = AllLoadingActions
         case Actions.SET_LOADING: return {
             ...state,
             loading: action.payload,
+            error: false,
         }
+
+        case Actions.SET_LOADING_ERROR: return {
+            ...state,
+            loading: false,
+            error: action.payload,
+        }
+
         default:
             return { ...state }
     }

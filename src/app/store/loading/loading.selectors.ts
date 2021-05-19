@@ -1,3 +1,3 @@
 import { LoadingState } from './loading.reducer'
 
-export const getLoading = (state: LoadingState) => state.loading
+export const getLoadingState = (state: LoadingState) => state

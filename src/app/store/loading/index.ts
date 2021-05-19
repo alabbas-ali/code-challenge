@@ -15,13 +15,7 @@ export interface ParentState {
 export const getParentState =
     createFeatureSelector<ParentState>('core')
 
-export const getState = createSelector(
+export const GetLoadingState = createSelector(
     getParentState,
-    (parent: ParentState) => parent.loading,
-)
-
-// feature selectors
-
-export const GetLoading = createSelector(
-    getState, fromSelectors.getLoading,
+    (parent: ParentState) => parent.loading
 )

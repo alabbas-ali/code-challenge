@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { DataService } from '@@services/data.service'
 import { Employee } from '@@model/employee'
-import { SetLoading , GetLoading } from '@@store/loading'
+import { SetLoading, GetLoadingState, LoadingState } from '@@store/loading'
 import { CoreState } from '@@store/index'
 import { Observable } from 'rxjs'
+import { SetLoadingError } from '@@store/loading/loading.actions'
 
 @Component({
     selector: 'app-home',
@@ -13,18 +14,18 @@ import { Observable } from 'rxjs'
 })
 export class HomeComponent implements OnInit {
 
-    loading$: Observable<boolean>
+    loadingState: LoadingState
     employees: Array<Employee>
-    loadingError: boolean = false
 
     constructor(
         private store: Store<CoreState>,
         private data: DataService,
     ) {
         this.store
-            .select<boolean>(GetLoading)
-            .subscribe(loading => {
-                console.log(loading)
+            .select<LoadingState>(GetLoadingState)
+            .subscribe(state => {
+                this.loadingState = state
+                console.log('this state', this.loadingState)
             })
     }
 
@@ -36,8 +37,7 @@ export class HomeComponent implements OnInit {
                 this.employees = list
             },
             (error: any) => {
-                this.store.dispatch(new SetLoading(false))
-                this.loadingError = true
+                this.store.dispatch(new SetLoadingError(true))
                 console.log(error)
             }) 
     }
