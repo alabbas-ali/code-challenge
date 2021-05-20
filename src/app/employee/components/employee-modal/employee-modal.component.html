@@ -1,0 +1,86 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button 
+            type="button" 
+            class="close pull-right" 
+            aria-label="Close" 
+            (click)="modalRef.hide()"
+        >
+            <span aria-hidden="true">×</span>
+        </button>
+        <h4 
+            class="modal-title w-100" 
+            id="myModalLabel"
+        >{{ heading }}</h4>
+    </div>
+    <div class="modal-body">
+        <form #employeeForm="ngForm">
+            <div class="md-form">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    name="employee_name" 
+                    [(ngModel)]="employee.employee_name" 
+                    mdbInput 
+                    mdbValidate
+                    [validateSuccess]="false" 
+                    #employee_name="ngModel" 
+                    required
+                >
+                <label for="employee_name">Employee Name</label>
+                <mdb-error *ngIf="employee_name && employee_name.invalid && (employee_name.dirty || employee_name.touched)">
+                    Employee name is required
+                </mdb-error>
+            </div>
+
+            <div class="md-form">
+                <textarea 
+                    type="text" 
+                    id="employee_salary" 
+                    class="md-textarea form-control" 
+                    name="employee_salary"
+                    [(ngModel)]="employee.employee_salary" 
+                    mdbInput 
+                    mdbValidate 
+                    [validateSuccess]="false"
+                    #employee_salary="ngModel" 
+                    required
+                ></textarea>
+                <label for="employee_salary">Employee Salary</label>
+                <mdb-error *ngIf="employee_salary && employee_salary.invalid && (employee_salary.dirty || employee_salary.touched)">
+                    Employee salary is required
+                </mdb-error>
+            </div>
+
+            <div class="md-form">
+                <input 
+                    type="text" 
+                    id="profile_image" 
+                    class="form-control" 
+                    name="profile_image" 
+                    [(ngModel)]="employee.profile_image"
+                    mdbInput>
+                <label for="profile_image">Profile Image</label>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button 
+            type="button" 
+            mdbBtn 
+            color="white" 
+            class="black-text waves-light" 
+            aria-label="Close"
+            (click)="modalRef.hide()" 
+            mdbWavesEffect
+        >Close</button>
+        <button 
+            type="button" 
+            mdbBtn 
+            color="primary" 
+            class="relative waves-light" 
+            mdbWavesEffect
+            (click)="onSave()"
+        >Save!</button>
+    </div>
+</div>

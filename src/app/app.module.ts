@@ -1,44 +1,51 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { RouterModule, Routes } from '@angular/router'
-import { HttpClientModule } from '@angular/common/http'
-import { StoreModule } from '@ngrx/store'
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { HomeComponent } from '@@pages/home/home.component'
-import { AboutComponent } from '@@pages/about/about.component'
-import { SharedComponentsModule } from '@@components/components.module'
-import { AppComponent } from './app.component'
-import { reducers } from '@@store/index'
-import { environment } from '../environments/environment'
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { StoreModule } from '@ngrx/store'
+import { EffectsModule } from '@ngrx/effects'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { ModalModule } from 'angular-bootstrap-md'
+
+import { CoreModule } from '@@core/core.module'
+import { AboutComponent } from '@@core/about/about.component'
+import { PageNotFoundComponent } from '@@core/page-not-found/page-not-found.component'
+import { SharedModule } from '@@shared/shared.module'
+
+import { AppComponent } from './app.component'
+import { environment } from '../environments/environment'
+import { EmployeesComponent } from './employee/containers/emplyees.component'
+import { EmployeeModule } from './employee/employee.module'
+import { reducers } from './reducers'
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'home', component: HomeComponent },
+    { path: '', component: EmployeesComponent },
     { path: 'about', component: AboutComponent },
+    { path: '**', component: PageNotFoundComponent }
 ]
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        AboutComponent,
-    ],
+    declarations: [AppComponent],
     imports: [
-        CommonModule,
         BrowserModule,
         BrowserAnimationsModule,
-        HttpClientModule,
-        RouterModule.forRoot(routes),
-        StoreModule.forRoot({}),
-        StoreModule.forFeature('core', reducers),
-        StoreDevtoolsModule.instrument({
+        ModalModule.forRoot(),
+        StoreModule.forRoot(reducers, {
+            runtimeChecks: {
+              strictStateImmutability: true,
+              strictActionImmutability: true
+            },
+        }),
+        RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+        !environment.production ? StoreDevtoolsModule.instrument({
             name: 'Code Challenge App',
             maxAge: 50,
             logOnly: environment.production,
-        }),
-        SharedComponentsModule
+        }) : [] ,
+        EffectsModule.forRoot([]),
+        CoreModule,
+        SharedModule,
+        EmployeeModule
     ],
     providers: [],
     bootstrap: [AppComponent]

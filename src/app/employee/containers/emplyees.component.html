@@ -1,0 +1,31 @@
+<section id="cards" class="text-center">
+
+    <!--Section heading-->
+    <h3 class="section-heading mb-5  h1 mt-0">Employees List</h3>
+
+    <button mdbBtn color="primary" class="ml-3" (click)="openAddEmployeeModal()">Add New Employee</button>
+
+    <!--Grid row-->
+    <div *ngIf="(isLoading$ | async)" [@inOutAnimation]  class="row">
+        <empty-employee-list> </empty-employee-list>
+
+        <div class="col-md-12">
+            <img 
+                src="/assets/loading.gif"
+                alt=""
+            >
+        </div>
+    </div>
+
+    <div *ngIf="!(isLoading$ | async)" [@inOutAnimation] class="row">
+        <div *ngFor="let employee of (employees$ | async)" class="col-md-6 col-lg-4">
+            <employee
+                [employee]="employee" 
+                (deleted)="onEmployeeDelete($event)"
+                (edited)="onEmployeeEdit($event)"
+            ></employee>
+        </div>
+    </div>
+    
+
+</section>

@@ -1,0 +1,35 @@
+<mdb-card>
+    <!--Card image-->
+    <mdb-card-img
+        src="{{ employee.profile_image || 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg' }}" 
+        alt="{{ employee.employee_name }}" 
+        class="waves-light"
+        mdbWavesEffect
+    >
+        <a href="#!" (click)="showDetail(employee)">
+            <div class="mask rgba-white-slight waves-effect waves-light"></div>
+        </a>
+    </mdb-card-img>
+    
+    <!--Card content-->
+    <mdb-card-body>
+
+        <!--Title-->
+        <mdb-card-title>
+            <h4>{{employee.employee_name}}</h4>
+        </mdb-card-title>
+
+        <!--Text-->
+        <mdb-card-text> 
+            <!-- Salary -->
+            <h5 class="blue-text pb-2"><strong>{{employee.employee_salary | currency}}</strong></h5>
+            <!-- Age -->
+            <p class="card-text">{{employee.employee_age}} years</p>
+        </mdb-card-text>
+
+        <div class="text-left">
+            <a mdbBtn color="primary" mdbWavesEffect (click)="onEdit()">Edit</a>
+            <a mdbBtn color="danger" mdbWavesEffect (click)="onDelete()">Delete</a>
+        </div>
+    </mdb-card-body>
+</mdb-card>
