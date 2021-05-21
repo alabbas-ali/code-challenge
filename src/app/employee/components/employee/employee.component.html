@@ -1,8 +1,8 @@
 <mdb-card>
     <!--Card image-->
     <mdb-card-img
-        src="{{ employee.profile_image || 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg' }}" 
-        alt="{{ employee.employee_name }}" 
+        src="{{ employee?.profile_image || 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg' }}" 
+        alt="{{ employee?.employee_name }}" 
         class="waves-light"
         mdbWavesEffect
     >
@@ -16,15 +16,15 @@
 
         <!--Title-->
         <mdb-card-title>
-            <h4>{{employee.employee_name}}</h4>
+            <h4>{{employee?.employee_name}}</h4>
         </mdb-card-title>
 
         <!--Text-->
         <mdb-card-text> 
             <!-- Salary -->
-            <h5 class="blue-text pb-2"><strong>{{employee.employee_salary | currency}}</strong></h5>
+            <h5 class="blue-text pb-2"><strong>{{employee?.employee_salary | currency}}</strong></h5>
             <!-- Age -->
-            <p class="card-text">{{employee.employee_age}} years</p>
+            <p class="card-text">{{employee?.employee_age}} years</p>
         </mdb-card-text>
 
         <div class="text-left">

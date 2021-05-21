@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { FormsModule } from '@angular/forms'
+import { StoreModule } from '@ngrx/store'
+import { ButtonsModule, CardsModule, IconsModule, InputsModule, InputUtilitiesModule, WavesModule } from 'angular-bootstrap-md'
 
 import { EmployeeComponent } from './employee.component'
 
@@ -8,6 +11,15 @@ describe('EmployeeComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports:[
+                FormsModule,
+                ButtonsModule,
+                InputsModule,
+                InputUtilitiesModule,
+                WavesModule,
+                IconsModule,
+                CardsModule,
+            ],
             declarations: [EmployeeComponent]
         })
             .compileComponents()

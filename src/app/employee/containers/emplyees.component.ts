@@ -8,7 +8,7 @@ import {
 } from '@angular/animations'
 import { Store, select } from '@ngrx/store'
 import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md'
-import { take, map } from 'rxjs/operators'
+import { take, map, timeout } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 
 import { ConfirmModalComponent } from '@@shared/components/confirm-modal/confirm-modal.component'
@@ -25,18 +25,18 @@ import { EmployeesState } from '../store/employees.state'
     styleUrls: ['./emplyees.component.scss'],
     animations: [
         trigger('inOutAnimation', [
-            state('in', style({opacity: 1})),
+            state('in', style({ opacity: 1 })),
             transition(':enter', [
-                style({opacity: 0}),
+                style({ opacity: 0 }),
                 animate(800)
             ]),
-            transition(':leave', animate(50, style({opacity: 0})))
+            transition(':leave', animate(50, style({ opacity: 0 })))
         ])
     ]
 })
 export class EmployeesComponent implements OnInit {
     employees$: Observable<Array<Employee> | null>
-    isLoading$: Observable<boolean>
+    loading: boolean = true
     modalRef: MDBModalRef
 
     emptyEmployeesList: Array<Employee> = [
@@ -69,16 +69,19 @@ export class EmployeesComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.isLoading$ = this.store.select(getAllLoaded)
-        this.employees$ = this.store.pipe(
-            select(getEmployees),
-            map((list: Array<Employee>) => {
-                if (!list) {
-                    this.store.dispatch(new fromEmployees.EmployeesQuery())
+        this.store.dispatch(new fromEmployees.EmployeesQuery())
+
+        this.store
+            .select(getAllLoaded)
+            .subscribe(loading => {
+                if (this.loading !== loading) {
+                    setTimeout(() => {
+                        this.loading = loading
+                    }, 800)
                 }
-                return list
             })
-        )
+
+        this.employees$ = this.store.select(getEmployees)
     }
 
     openAddEmployeeModal() {
@@ -92,7 +95,7 @@ export class EmployeesComponent implements OnInit {
     }
 
     openEditEmployeeModal(employee: Employee) {
-        this.modalRef = this.modalService.show(EmployeeModalComponent,  {
+        this.modalRef = this.modalService.show(EmployeeModalComponent, {
             class: 'modal-full-height modal-right modal-notify modal-info'
         })
         this.modalRef.content.heading = 'Edit Employee'
@@ -103,7 +106,7 @@ export class EmployeesComponent implements OnInit {
     }
 
     openConfirmModal(employee: Employee) {
-        this.modalRef = this.modalService.show(ConfirmModalComponent,  {
+        this.modalRef = this.modalService.show(ConfirmModalComponent, {
             class: 'modal-dialog-centered modal-notify modal-danger'
         })
         this.modalRef.content.confirmation.pipe(take(1)).subscribe((confirmation: boolean) => {

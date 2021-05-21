@@ -1,20 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { MDBModalRef } from 'angular-bootstrap-md'
 
-import { ProjectModalComponent } from './employee-modal.component'
+import { EmployeeModalComponent } from './employee-modal.component'
 
-describe('ProjectModalComponent', () => {
-    let component: ProjectModalComponent
-    let fixture: ComponentFixture<ProjectModalComponent>
+describe('EmployeeModalComponent', () => {
+    let component: EmployeeModalComponent
+    let fixture: ComponentFixture<EmployeeModalComponent>
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ProjectModalComponent]
+            declarations: [EmployeeModalComponent],
+            providers: [MDBModalRef]
         })
             .compileComponents()
     }))
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ProjectModalComponent)
+        fixture = TestBed.createComponent(EmployeeModalComponent)
         component = fixture.componentInstance
         fixture.detectChanges()
     })

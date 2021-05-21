@@ -4,9 +4,9 @@
     <h3 class="section-heading mb-5 h1 mt-0">Employees List</h3>
 
     <button mdbBtn color="primary" class="mb-5" (click)="openAddEmployeeModal()">Add New Employee</button>
-
-    <!--Show wn empty list of employees as loading effects with animation untill the acctual data gets loaded-->
-    <div *ngIf="(isLoading$ | async)" [@inOutAnimation]  class="row">
+    
+    <!--Show an empty list of employees as loading effects with animation untill the acctual data gets loaded-->
+    <div *ngIf="loading" [@inOutAnimation]  class="row">
         <div *ngFor="let employee of emptyEmployeesList" class="col-md-6 col-lg-4 mb-5">
             <employee
                 [employee]="employee"
@@ -24,7 +24,7 @@
     </div>
 
     <!-- Display the employees list -->
-    <div *ngIf="!(isLoading$ | async)" [@inOutAnimation] class="row">
+    <div *ngIf="!loading" [@inOutAnimation] class="row">
         <div *ngFor="let employee of (employees$ | async)" class="col-md-6 col-lg-4 mb-5">
             <employee
                 [employee]="employee" 

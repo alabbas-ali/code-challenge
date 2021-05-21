@@ -8,6 +8,6 @@ export interface EmployeesState {
 
 export const EmployeesInitialState: EmployeesState = {
     list: null,
-    loading: false,
+    loading: true,
     error: null
 }

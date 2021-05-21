@@ -30,11 +30,10 @@ import { EmployeeModalComponent } from './components/employee-modal/employee-mod
         FormsModule,
         ButtonsModule,
         InputsModule,
+        InputUtilitiesModule,
         WavesModule,
         IconsModule,
         CardsModule,
-        InputsModule,
-        InputUtilitiesModule,
         StoreModule.forFeature('employee', fromEmployees.employeesReducer),
         EffectsModule.forFeature([EmployeesEffects])
     ],
