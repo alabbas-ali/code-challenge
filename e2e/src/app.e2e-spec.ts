@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
     it('should display The logo header text', () => {
         page.navigateTo()
-        expect(page.getHeaderLogoText()).toEqual('Code Chanllange')
+        expect(page.getHeaderLogoText()).toEqual('Code Challenge')
     })
 
     afterEach(async () => {

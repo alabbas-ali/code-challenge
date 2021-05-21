@@ -33,6 +33,6 @@ describe('AppComponent', () => {
     //     fixture.detectChanges()
     //     const compiled = fixture.nativeElement
     //     console.log(compiled)
-    //     expect(compiled.querySelector('.navbar-brand').textContent).toContain(' Code Chanllange ')
+    //     expect(compiled.querySelector('.navbar-brand').textContent).toContain('Code Challenge')
     // })
 })
