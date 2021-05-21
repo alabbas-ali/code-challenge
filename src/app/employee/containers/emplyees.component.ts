@@ -39,9 +39,29 @@ export class EmployeesComponent implements OnInit {
     isLoading$: Observable<boolean>
     modalRef: MDBModalRef
 
-    modalConfig = {
-        class: 'modal-dialog-centered'
-    }
+    emptyEmployeesList: Array<Employee> = [
+        {
+            id: "",
+            employee_name: "..",
+            employee_salary: 0.0,
+            employee_age: 0,
+            profile_image: "/assets/loading_profile.gif"
+        },
+        {
+            id: "",
+            employee_name: "..",
+            employee_salary: 0.0,
+            employee_age: 0,
+            profile_image: "/assets/loading_profile.gif"
+        },
+        {
+            id: "",
+            employee_name: "..",
+            employee_salary: 0.0,
+            employee_age: 0,
+            profile_image: "/assets/loading_profile.gif"
+        }
+    ] 
 
     constructor(
         private store: Store<EmployeesState>,
@@ -62,27 +82,33 @@ export class EmployeesComponent implements OnInit {
     }
 
     openAddEmployeeModal() {
-        this.modalRef = this.modalService.show(EmployeeModalComponent, this.modalConfig)
+        this.modalRef = this.modalService.show(EmployeeModalComponent, {
+            class: 'modal-full-height modal-right modal-notify modal-info'
+        })
         this.modalRef.content.heading = 'Add new Employee'
-        this.modalRef.content.projectData.pipe(take(1)).subscribe((projectData: Employee) => {
-            this.store.dispatch(new fromEmployees.EmployeeAdded({ employee: projectData }))
+        this.modalRef.content.employeeData.pipe(take(1)).subscribe((employeeData: Employee) => {
+            this.store.dispatch(new fromEmployees.EmployeeSave({ employee: employeeData }))
         })
     }
 
     openEditEmployeeModal(employee: Employee) {
-        this.modalRef = this.modalService.show(EmployeeModalComponent, this.modalConfig)
+        this.modalRef = this.modalService.show(EmployeeModalComponent,  {
+            class: 'modal-full-height modal-right modal-notify modal-info'
+        })
         this.modalRef.content.heading = 'Edit Employee'
-        this.modalRef.content.project = { ...employee }
-        this.modalRef.content.projectData.pipe(take(1)).subscribe((employeeData: Employee) => {
-            this.store.dispatch(new fromEmployees.EmployeeEdited({ employee: employeeData }))
+        this.modalRef.content.employee = { ...employee }
+        this.modalRef.content.employeeData.pipe(take(1)).subscribe((employeeData: Employee) => {
+            this.store.dispatch(new fromEmployees.EmployeeSave({ employee: employeeData }))
         })
     }
 
     openConfirmModal(employee: Employee) {
-        this.modalRef = this.modalService.show(ConfirmModalComponent, this.modalConfig)
+        this.modalRef = this.modalService.show(ConfirmModalComponent,  {
+            class: 'modal-dialog-centered modal-notify modal-danger'
+        })
         this.modalRef.content.confirmation.pipe(take(1)).subscribe((confirmation: boolean) => {
             if (confirmation) {
-                this.store.dispatch(new fromEmployees.EmployeeDeleted({ employee }))
+                this.store.dispatch(new fromEmployees.EmployeeDelete({ employee }))
             }
         })
     }

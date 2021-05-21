@@ -6,12 +6,15 @@ import { EmployeesActionTypes } from './employees.actions'
 import * as fromEmployees from './employees.actions'
 import { EmployeeService } from '../services/employee.service'
 import { of } from 'rxjs'
+import { Store } from '@ngrx/store'
+import { EmployeesState } from './employees.state'
 
 @Injectable()
 export class EmployeesEffects {
 
     constructor(
         private actions$: Actions,
+        private store: Store<EmployeesState>,
         private employeeService: EmployeeService,
     ) { }
 
@@ -26,25 +29,29 @@ export class EmployeesEffects {
     )
 
     @Effect({ dispatch: false })
-    added$ = this.actions$.pipe(
-        ofType(EmployeesActionTypes.Employee_ADDED),
-        map((action: fromEmployees.EmployeeAdded) => action.payload),
-        switchMap(([payload]: any): any => this.employeeService.add(payload.employee))
+    save$ = this.actions$.pipe(
+        ofType(EmployeesActionTypes.EMPLOYEE_SAVE),
+        map((action: fromEmployees.EmployeeSave) => action.payload),
+        switchMap((payload: any) => this.employeeService.save(payload.employee)
+            .pipe(map(employee => { 
+                return this.store.dispatch(new fromEmployees.EmployeeSaved({ employee: employee }))
+            },
+            catchError(error => of(new fromEmployees.EmployeesError({ error })))
+        )))
     )
 
     @Effect({ dispatch: false })
     delete$ = this.actions$.pipe(
-        ofType(EmployeesActionTypes.Employee_DELETED),
-        map((action: fromEmployees.EmployeeDeleted) => action.payload),
-        switchMap(([payload]: any): any => this.employeeService.delete(payload.employee))
-    )
-
-    @Effect({ dispatch: false })
-    edit$ = this.actions$.pipe(
-        ofType(EmployeesActionTypes.Employee_EDITED),
-        map((action: fromEmployees.EmployeeEdited) => action.payload),
-        switchMap(([payload]: any): any => this.employeeService.update(payload.employee)
-        )
+        ofType(EmployeesActionTypes.EMPLOYEE_DELETE),
+        map((action: fromEmployees.EmployeeDelete) => action.payload),
+        switchMap((payload: any) => this.employeeService.delete(payload.employee)
+            .pipe(map(deleted => {
+                if (deleted)
+                    return this.store.dispatch(new fromEmployees.EmployeeDeleted({ employee: payload.employee }))
+                else return 
+            },
+            catchError(error => of(new fromEmployees.EmployeesError({ error })))
+        )))
     )
 
 }

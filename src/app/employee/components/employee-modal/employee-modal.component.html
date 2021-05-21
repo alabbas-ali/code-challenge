@@ -18,6 +18,7 @@
             <div class="md-form">
                 <input 
                     type="text" 
+                    id="employee_name" 
                     class="form-control" 
                     name="employee_name" 
                     [(ngModel)]="employee.employee_name" 
@@ -34,7 +35,7 @@
             </div>
 
             <div class="md-form">
-                <textarea 
+                <input 
                     type="text" 
                     id="employee_salary" 
                     class="md-textarea form-control" 
@@ -45,7 +46,7 @@
                     [validateSuccess]="false"
                     #employee_salary="ngModel" 
                     required
-                ></textarea>
+                >
                 <label for="employee_salary">Employee Salary</label>
                 <mdb-error *ngIf="employee_salary && employee_salary.invalid && (employee_salary.dirty || employee_salary.touched)">
                     Employee salary is required
@@ -54,16 +55,37 @@
 
             <div class="md-form">
                 <input 
+                    type="number" 
+                    id="employee_age" 
+                    class="md-textarea form-control" 
+                    name="employee_age"
+                    [(ngModel)]="employee.employee_age" 
+                    mdbInput 
+                    mdbValidate 
+                    [validateSuccess]="false"
+                    #employee_age="ngModel" 
+                    required
+                >
+                <label for="employee_age">Employee age</label>
+                <mdb-error *ngIf="employee_age && employee_age.invalid && (employee_age.dirty || employee_age.touched)">
+                    Employee age is required
+                </mdb-error>
+            </div>
+
+            <div class="md-form">
+                <input
                     type="text" 
                     id="profile_image" 
                     class="form-control" 
                     name="profile_image" 
                     [(ngModel)]="employee.profile_image"
-                    mdbInput>
+                    mdbInput
+                >
                 <label for="profile_image">Profile Image</label>
             </div>
         </form>
     </div>
+
     <div class="modal-footer">
         <button 
             type="button" 
@@ -74,6 +96,7 @@
             (click)="modalRef.hide()" 
             mdbWavesEffect
         >Close</button>
+
         <button 
             type="button" 
             mdbBtn 
@@ -82,5 +105,6 @@
             mdbWavesEffect
             (click)="onSave()"
         >Save!</button>
+
     </div>
 </div>

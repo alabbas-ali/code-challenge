@@ -4,9 +4,10 @@ import { Employee } from '../model/employee'
 export enum EmployeesActionTypes {
   EMPLOYEES_QUERY = '[Employees] Employees query',
   EMPLOYEES_LOADED = '[Employees] Employees loaded',
-  Employee_ADDED = '[Employees] Employee added',
-  Employee_EDITED = '[Employees] Employee edited',
-  Employee_DELETED = '[Employees] Employee deleted',
+  EMPLOYEE_SAVE = '[Employees] Employee save',
+  EMPLOYEE_SAVED = '[Employees] Employee saved',
+  EMPLOYEE_DELETE = '[Employees] Employee delete',
+  EMPLOYEE_DELETED = '[Employees] Employee deleted',
   EMPLOYEES_ERROR = '[Employees] Employees error',
 }
 
@@ -20,20 +21,25 @@ export class EmployeesLoaded implements Action {
   constructor(public payload: { list: Array<Employee> }) {}
 }
 
-export class EmployeeAdded implements Action {
-  readonly type = EmployeesActionTypes.Employee_ADDED
+export class EmployeeSave implements Action {
+  readonly type = EmployeesActionTypes.EMPLOYEE_SAVE
 
   constructor(public payload: { employee: Employee}) {}
 }
 
-export class EmployeeEdited implements Action {
-  readonly type = EmployeesActionTypes.Employee_EDITED
+export class EmployeeSaved implements Action {
+  readonly type = EmployeesActionTypes.EMPLOYEE_SAVED
+
+  constructor(public payload: { employee: Employee}) {}
+}
+
+export class EmployeeDelete implements Action {
+  readonly type = EmployeesActionTypes.EMPLOYEE_DELETE
 
   constructor(public payload: { employee: Employee }) {}
 }
-
 export class EmployeeDeleted implements Action {
-  readonly type = EmployeesActionTypes.Employee_DELETED
+  readonly type = EmployeesActionTypes.EMPLOYEE_DELETED
 
   constructor(public payload: { employee: Employee }) {}
 }
@@ -47,7 +53,8 @@ export class EmployeesError implements Action {
 export type EmployeesActions =
   | EmployeesQuery
   | EmployeesLoaded
-  | EmployeeAdded
-  | EmployeeEdited
+  | EmployeeSave
+  | EmployeeSaved
+  | EmployeeDelete
   | EmployeeDeleted
   | EmployeesError

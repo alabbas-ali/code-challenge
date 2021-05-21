@@ -19,7 +19,6 @@ import { EmployeesEffects } from './store/employees.effects'
 import * as fromEmployees from './store/employees.reducer'
 import { EmployeeComponent } from './components/employee/employee.component'
 import { EmployeesComponent } from './containers/emplyees.component'
-import { EmptyEmployeeListComponent } from './components/empty-employee-list/empty-employee-list.component'
 import { EmployeeModalComponent } from './components/employee-modal/employee-modal.component'
 
 @NgModule({
@@ -42,7 +41,6 @@ import { EmployeeModalComponent } from './components/employee-modal/employee-mod
     declarations: [
       EmployeeComponent,
       EmployeeModalComponent,
-      EmptyEmployeeListComponent,
       EmployeesComponent
     ],
     exports: [EmployeesComponent],
