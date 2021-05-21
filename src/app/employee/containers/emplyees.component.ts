@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core'
-import { 
-    animate, 
-    state, 
-    style, 
-    transition, 
-    trigger 
+import {
+    animate,
+    state,
+    style,
+    transition,
+    trigger
 } from '@angular/animations'
 import { Store, select } from '@ngrx/store'
 import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md'
@@ -41,27 +41,27 @@ export class EmployeesComponent implements OnInit {
 
     emptyEmployeesList: Array<Employee> = [
         {
-            id: "",
-            employee_name: "..",
+            id: '',
+            employee_name: '..',
             employee_salary: 0.0,
             employee_age: 0,
-            profile_image: "/assets/loading_profile.gif"
+            profile_image: '/assets/loading_profile.gif'
         },
         {
-            id: "",
-            employee_name: "..",
+            id: '',
+            employee_name: '..',
             employee_salary: 0.0,
             employee_age: 0,
-            profile_image: "/assets/loading_profile.gif"
+            profile_image: '/assets/loading_profile.gif'
         },
         {
-            id: "",
-            employee_name: "..",
+            id: '',
+            employee_name: '..',
             employee_salary: 0.0,
             employee_age: 0,
-            profile_image: "/assets/loading_profile.gif"
+            profile_image: '/assets/loading_profile.gif'
         }
-    ] 
+    ]
 
     constructor(
         private store: Store<EmployeesState>,

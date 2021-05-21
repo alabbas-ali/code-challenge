@@ -6,8 +6,8 @@ export const getEmployeesState = createFeatureSelector<EmployeesState>('employee
 
 export const getEmployees = createSelector(
     getEmployeesState,
-    (employees: EmployeesState):  Array<Employee> => employees.list
-) 
+    (employees: EmployeesState): Array<Employee> => employees.list
+)
 
 export const getAllLoaded = createSelector(
     getEmployeesState,

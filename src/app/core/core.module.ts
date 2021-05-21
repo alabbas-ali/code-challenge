@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router'
 
 import {
     NavbarModule,
@@ -15,7 +15,7 @@ import { AppHeaderComponent } from './header/header.component'
 import { AppFooterComponent } from './footer/footer.component'
 import { HomeComponent } from './home/home.component'
 import { AboutComponent } from './about/about.component'
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
 @NgModule({
     imports: [

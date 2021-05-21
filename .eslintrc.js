@@ -36,24 +36,8 @@ module.exports = {
     ],
     "rules": {
         "@angular-eslint/component-class-suffix": "error",
-        "@angular-eslint/component-selector": [
-            "error",
-            {
-                "type": "element",
-                "prefix": "app",
-                "style": "kebab-case"
-            }
-        ],
         "@angular-eslint/contextual-lifecycle": "error",
         "@angular-eslint/directive-class-suffix": "error",
-        "@angular-eslint/directive-selector": [
-            "error",
-            {
-                "type": "attribute",
-                "prefix": "app",
-                "style": "camelCase"
-            }
-        ],
         "@angular-eslint/no-conflicting-lifecycle": "error",
         "@angular-eslint/no-host-metadata-property": "error",
         "@angular-eslint/no-input-rename": "error",
@@ -123,9 +107,9 @@ module.exports = {
             }
         ],
         "@typescript-eslint/member-ordering": "error",
-        "@typescript-eslint/naming-convention": "error",
+        "@typescript-eslint/naming-convention": "warn",
         "@typescript-eslint/no-empty-function": "off",
-        "@typescript-eslint/no-empty-interface": "error",
+        "@typescript-eslint/no-empty-interface": "warn",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-inferrable-types": [
             "error",
@@ -176,7 +160,6 @@ module.exports = {
             "error",
             "smart"
         ],
-        "guard-for-in": "error",
         "id-blacklist": [
             "error",
             "any",
@@ -199,7 +182,7 @@ module.exports = {
         "max-len": [
             "error",
             {
-                "code": 140
+                "code": 200
             }
         ],
         "new-parens": "error",

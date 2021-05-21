@@ -1,9 +1,9 @@
 import { Employee } from '../model/employee'
 
 export interface EmployeesState {
-    list: Array<Employee> | null
-    loading: boolean
-    error: any
+    list: Array<Employee> | null;
+    loading: boolean;
+    error: boolean;
 }
 
 export const EmployeesInitialState: EmployeesState = {

@@ -1,10 +1,10 @@
-import { 
-    Component, 
-    OnInit, 
+import {
+    Component,
+    OnInit,
     Input,
-    Output, 
-    EventEmitter, 
-    ChangeDetectionStrategy 
+    Output,
+    EventEmitter,
+    ChangeDetectionStrategy
 } from '@angular/core'
 import { Employee } from '../../model/employee'
 

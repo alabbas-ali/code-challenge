@@ -32,8 +32,8 @@ const routes: Routes = [
         ModalModule.forRoot(),
         StoreModule.forRoot(reducers, {
             runtimeChecks: {
-              strictStateImmutability: true,
-              strictActionImmutability: true
+                strictStateImmutability: true,
+                strictActionImmutability: true
             },
         }),
         RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),

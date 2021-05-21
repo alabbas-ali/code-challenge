@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
-import { 
+import {
     ButtonsModule,
     CardsModule,
     IconsModule,
@@ -23,26 +23,26 @@ import { EmployeeModalComponent } from './components/employee-modal/employee-mod
 
 @NgModule({
     imports: [
-      CommonModule,
-      ModalModule,
-      SharedModule,
-      HttpClientModule,
-      FormsModule,
-      ButtonsModule,
-      InputsModule,
-      WavesModule,
-      IconsModule,
-      CardsModule,
-      InputsModule,
-      InputUtilitiesModule,
-      StoreModule.forFeature('employee', fromEmployees.employeesReducer),
-      EffectsModule.forFeature([EmployeesEffects])
+        CommonModule,
+        ModalModule,
+        SharedModule,
+        HttpClientModule,
+        FormsModule,
+        ButtonsModule,
+        InputsModule,
+        WavesModule,
+        IconsModule,
+        CardsModule,
+        InputsModule,
+        InputUtilitiesModule,
+        StoreModule.forFeature('employee', fromEmployees.employeesReducer),
+        EffectsModule.forFeature([EmployeesEffects])
     ],
     declarations: [
-      EmployeeComponent,
-      EmployeeModalComponent,
-      EmployeesComponent
+        EmployeeComponent,
+        EmployeeModalComponent,
+        EmployeesComponent
     ],
     exports: [EmployeesComponent],
-  })
-  export class EmployeeModule { }
+})
+export class EmployeeModule { }
