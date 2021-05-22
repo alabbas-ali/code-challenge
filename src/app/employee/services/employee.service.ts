@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 
 import { Employee } from 'src/app/employee/model/employee'
 
@@ -29,8 +29,6 @@ export class EmployeeService {
 
     private api = environment.API_HOST
 
-    private defaultHeaders = new HttpHeaders()
-
     constructor(
         protected httpClient: HttpClient,
     ) { }
@@ -38,63 +36,14 @@ export class EmployeeService {
     /**
      * Get Employees
      * Get a list of Employees
-     *
-     * @param additionalParams object containing any additional query parameters
-     * @param reportProgress flag to report request and response progress.
-     * @param selectAccepts optional closure that receives all possible values for the accept header and should return the desired one
-     * @param selectConsumes optional closure that receives all possible values for the content type header and should return the desired one
      */
-    public getAll(
-        additionalParams?: { [name: string]: any },
-        reportProgress = false,
-        selectAccepts?: (accepts: Array<string>) => string,
-        selectConsumes?: (consumes: Array<string>) => string,
-    ): Observable<Array<Employee>> {
-
-        let queryParameters = new HttpParams()
-
-        if (additionalParams) {
-            for (const param in additionalParams)
-            {queryParameters = queryParameters.append(param, additionalParams[param])}
-        }
-
-        let headers = this.defaultHeaders
-
-        // to determine the Accept header
-        const accepts: Array<string> = [
-            'application/json',
-        ]
-
-        if (accepts.length > 0) {
-            const selectedAcceptsHeader: string = selectAccepts
-                ? selectAccepts(accepts)
-                : accepts[0]
-            headers = headers.set('Accept', selectedAcceptsHeader)
-        }
-
-        // to determine the Content-Type header
-        const consumes: Array<string> = [
-            'application/json',
-        ]
-
-        if (consumes.length > 0) {
-            const selectedConsumesHeader: string = selectConsumes
-                ? selectConsumes(consumes)
-                : consumes[0]
-            headers = headers.set('Content-Type', selectedConsumesHeader)
-        }
-
-        return this.httpClient.get<GetAllApiResponce>(`${this.api}/employees`,
-            {
-                params: queryParameters,
-                headers,
-                reportProgress,
-            },
-        ).pipe(map((responce: GetAllApiResponce): Array<Employee> => {
-            if (responce.status !== 'success') {throw new Error('Error in retriving Employees')}
-            return responce.data
-        }))
-
+    public getAll(): Observable<Array<Employee>> {
+        return this.httpClient
+            .get<GetAllApiResponce>(`${this.api}/employees`)
+            .pipe(map((responce: GetAllApiResponce): Array<Employee> => {
+                if (responce.status !== 'success') { throw new Error('Error in retriving Employees') }
+                return responce.data
+            }))
     }
 
     /**
@@ -102,143 +51,40 @@ export class EmployeeService {
      * Get a specific Employee by id.
      *
      * @param id id of the emplyee requested
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param additionalParams object containing any additional query parameters
-     * @param reportProgress flag to report request and response progress.
-     * @param selectAccepts optional closure that receives all possible values for the accept header and should return the desired one
-     * @param selectConsumes optional closure that receives all possible values for the content type header and should return the desired one
      */
-    public get(
-        id: string,
-        additionalParams?: { [name: string]: any },
-        reportProgress = false,
-        selectAccepts?: (accepts: Array<string>) => string,
-        selectConsumes?: (consumes: Array<string>) => string,
-    ): Observable<Employee> {
+    public get(id: string): Observable<Employee> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getBlocking.')
         }
-
-        let queryParameters = new HttpParams()
-
-        if (additionalParams) {
-            for (const param in additionalParams)
-            {queryParameters = queryParameters.append(param, additionalParams[param])}
-        }
-
-
-        let headers = this.defaultHeaders
-
-        // to determine the Accept header
-        const accepts: Array<string> = [
-            'application/json',
-        ]
-
-        if (accepts.length > 0) {
-            const selectedAcceptsHeader: string = selectAccepts
-                ? selectAccepts(accepts)
-                : accepts[0]
-            headers = headers.set('Accept', selectedAcceptsHeader)
-        }
-
-        // to determine the Content-Type header
-        const consumes: Array<string> = [
-            'application/json',
-        ]
-
-        if (consumes.length > 0) {
-            const selectedConsumesHeader: string = selectConsumes
-                ? selectConsumes(consumes)
-                : consumes[0]
-            headers = headers.set('Content-Type', selectedConsumesHeader)
-        }
-
-        return this.httpClient.get<SaveApiResponce>(`${this.api}/employee/${encodeURIComponent(String(id))}`,
-            {
-                params: queryParameters,
-                headers,
-                reportProgress,
-            },
-        ).pipe(map((responce: SaveApiResponce): Employee => {
-            if (responce.status !== 'success') {throw new Error(`Error in retriving Employee with id = ${id}`)}
-            return responce.data
-        }))
+        return this.httpClient
+            .get<SaveApiResponce>(`${this.api}/employee/${encodeURIComponent(String(id))}`)
+            .pipe(map((responce: SaveApiResponce): Employee => {
+                if (responce.status !== 'success') { throw new Error(`Error in retriving Employee with id = ${id}`) }
+                return responce.data
+            }))
     }
 
     /**
      * Create or save Employee
      *
      * @param employee Employee
-     * @param additionalParams object containing any additional query parameters
-     * @param selectAccepts optional closure that receives all possible values for the accept header and should return the desired one
-     * @param selectConsumes optional closure that receives all possible values for the content type header and should return the desired one
      */
-    public save(
-        employee: Employee,
-        additionalParams?: { [name: string]: any },
-        selectAccepts?: (accepts: Array<string>) => string,
-        selectConsumes?: (consumes: Array<string>) => string,
-    ): Observable<Employee> {
-
-        if (employee === null || employee === undefined) {
-            throw new Error('Required parameter booking was null or undefined when calling createBooking.')
+    public save(employee: Employee): Observable<Employee> {
+        if (employee.id) {
+            return this.httpClient
+                .put<SaveApiResponce>(`${this.api}/update/${encodeURIComponent(String(employee.id))}`, employee)
+                .pipe(map((responce: SaveApiResponce): Employee => {
+                    if (responce.status !== 'success') { throw new Error('Error in saving the Employee') }
+                    return responce.data
+                }))
+        } else {
+            return this.httpClient
+                .post<SaveApiResponce>(`${this.api}/create`, employee)
+                .pipe(map((responce: SaveApiResponce): Employee => {
+                    if (responce.status !== 'success') { throw new Error('Error in saving the Employee') }
+                    return responce.data
+                }))
         }
-
-        let queryParameters = new HttpParams()
-
-        if (additionalParams) {
-            for (const param in additionalParams)
-            {queryParameters = queryParameters.append(param, additionalParams[param])}
-        }
-
-        let headers = this.defaultHeaders
-
-        // to determine the Accept header
-        const accepts: Array<string> = [
-            'application/json',
-        ]
-
-        if (accepts.length > 0) {
-            const selectedAcceptsHeader: string = selectAccepts
-                ? selectAccepts(accepts)
-                : accepts[0]
-            headers = headers.set('Accept', selectedAcceptsHeader)
-        }
-
-        // to determine the Content-Type header
-        const consumes: Array<string> = [
-            'application/json',
-        ]
-
-        if (consumes.length > 0) {
-            const selectedConsumesHeader: string = selectConsumes
-                ? selectConsumes(consumes)
-                : consumes[0]
-            headers = headers.set('Content-Type', selectedConsumesHeader)
-        }
-
-        if (employee.id)
-        {return this.httpClient.put<SaveApiResponce>(`${this.api}/update/${encodeURIComponent(String(employee.id))}` ,
-            employee,
-            {
-                params: queryParameters,
-                headers,
-            },
-        ).pipe(map((responce: SaveApiResponce): Employee => {
-            if (responce.status !== 'success') {throw new Error('Error in saving the Employee')}
-            return responce.data
-        }))}
-        else
-        {return this.httpClient.post<SaveApiResponce>(`${this.api}/create` ,
-            employee,
-            {
-                params: queryParameters,
-                headers,
-            },
-        ).pipe(map((responce: SaveApiResponce): Employee => {
-            if (responce.status !== 'success') {throw new Error('Error in saving the Employee')}
-            return responce.data
-        }))}
     }
 
     /**
@@ -248,7 +94,7 @@ export class EmployeeService {
         return this.httpClient
             .delete<DeleteApiResponce>(`${this.api}/delete/${encodeURIComponent(String(employee.id))}`)
             .pipe(map((responce: DeleteApiResponce): boolean => {
-                if (responce.status !== 'success') {return false}
+                if (responce.status !== 'success') { return false }
                 return true
             }))
     }

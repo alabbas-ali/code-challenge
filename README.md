@@ -52,8 +52,3 @@ Run `docker build . -t alabbas/code-challenge` create the image with tag alabbas
 Run `docker images` command to list all the docker images in your machine.
 Run `docker run -p 3000:80 alabbas/code-challenge` to run the docker image.
 Navigate to your browser with `http://localhost:3000`
-
-Unfortunately the API is blocked by CORS policy. 
-So until we have a running backend proxy maybe using angular server this docker container run will not be a very good option. 
-I try to get that runing maybe could be done later in future.
-
