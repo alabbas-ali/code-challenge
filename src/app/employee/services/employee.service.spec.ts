@@ -60,8 +60,8 @@ describe('EmployeeService', () => {
                 expect(employees).toEqual(dummyEmployees)
             })
 
-            const req = httpMock.expectOne(`/api/v1/employees`)
-            expect(req.request.method).toBe("GET")
+            const req = httpMock.expectOne('/api/v1/employees')
+            expect(req.request.method).toBe('GET')
             req.flush(dummyEmployees)
         })
     })

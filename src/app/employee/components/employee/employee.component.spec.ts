@@ -11,7 +11,7 @@ describe('EmployeeComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports:[
+            imports: [
                 FormsModule,
                 ButtonsModule,
                 InputsModule,

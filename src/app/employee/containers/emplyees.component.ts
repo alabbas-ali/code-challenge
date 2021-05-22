@@ -36,7 +36,7 @@ import { EmployeesState } from '../store/employees.state'
 })
 export class EmployeesComponent implements OnInit {
     employees$: Observable<Array<Employee> | null>
-    loading: boolean = true
+    loading = true
     modalRef: MDBModalRef
 
     emptyEmployeesList: Array<Employee> = [

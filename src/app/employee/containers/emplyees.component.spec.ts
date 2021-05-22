@@ -24,7 +24,7 @@ describe('EmployeesComponent', () => {
         TestBed.configureTestingModule({
             declarations: [EmployeesComponent],
             providers: [{ provide: Store, useClass: StoreMock },
-                
+
             ]
         })
             .compileComponents()
