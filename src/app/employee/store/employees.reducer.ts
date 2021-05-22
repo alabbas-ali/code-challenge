@@ -15,7 +15,6 @@ export const employeesReducer = (
     }
 
     case EmployeesActionTypes.EMPLOYEES_LOADED: {
-        console.log('EMPLOYEES LOADED')
         return Object.assign({}, state, {
             list: action.payload.list,
             loading: false,
