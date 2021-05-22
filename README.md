@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 The Project is an example of using REST-API `http://dummy.restapiexample.com/` to List, add, edit and remove an employ.
 
-This project is Hosted publiclly free AWS under `https://`  
+This project is Hosted publiclly free AWS under `https://codechallenge.club/`  
 
 The application is using the tsconfig to define some application patches for including shortening
 
@@ -30,7 +30,9 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. 
+
+Use the `--prod` flag for a production build.
 
 ## Running unit tests
 
@@ -43,4 +45,15 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Lint Project
 
 Run `npm run lint` to check the lint proplems. or `npm run lint--autofix` to activate the autofixer from fixing the possible lint erros to fix.
+
+# Docker Run
+
+Run `docker build . -t alabbas/code-challenge` create the image with tag alabbas/code-challenge.
+Run `docker images` command to list all the docker images in your machine.
+Run `docker run -p 3000:80 alabbas/code-challenge` to run the docker image.
+Navigate to your browser with `http://localhost:3000`
+
+Unfortunately the API is blocked by CORS policy. 
+So until we have a running backend proxy maybe using angular server this docker container run will not be a very good option. 
+I try to get that runing maybe could be done later in future.
 
