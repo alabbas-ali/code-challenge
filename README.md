@@ -49,6 +49,9 @@ Run `npm run lint` to check the lint proplems. or `npm run lint--autofix` to act
 # Docker Run
 
 Run `docker build . -t alabbas/code-challenge` create the image with tag alabbas/code-challenge.
+
 Run `docker images` command to list all the docker images in your machine.
+
 Run `docker run -p 3000:80 alabbas/code-challenge` to run the docker image.
+
 Navigate to your browser with `http://localhost:3000`
