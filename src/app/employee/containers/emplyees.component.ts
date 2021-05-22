@@ -14,7 +14,7 @@ import { Observable } from 'rxjs'
 import { ConfirmModalComponent } from '@@shared/components/confirm-modal/confirm-modal.component'
 
 import { Employee } from '../model/employee'
-import { getAllLoaded, getEmployees } from '../store/employees.selectors'
+import { getAllLoaded, getEmployees, getError } from '../store/employees.selectors'
 import * as fromEmployees from './../store/employees.actions'
 import { EmployeeModalComponent } from '../components/employee-modal/employee-modal.component'
 import { EmployeesState } from '../store/employees.state'
@@ -80,6 +80,18 @@ export class EmployeesComponent implements OnInit {
                     }, 800)
                 }
             })
+        
+        this.store
+            .select(getError)
+            .subscribe(error => {
+                if (error) {
+                    this.modalRef = this.modalService.show(ConfirmModalComponent, {
+                        class: 'modal-dialog modal-notify modal-danger modal-side modal-top-right'
+                    })
+                    this.modalRef.content.heading = 'Error happen'
+                    this.modalRef.content.content = error
+                }
+            })
 
         this.employees$ = this.store.select(getEmployees)
     }
@@ -109,6 +121,8 @@ export class EmployeesComponent implements OnInit {
         this.modalRef = this.modalService.show(ConfirmModalComponent, {
             class: 'modal-dialog-centered modal-notify modal-danger'
         })
+        this.modalRef.content.heading = 'Delete Confermation'
+        this.modalRef.content.content = 'Are you sure you want to delete this item?'
         this.modalRef.content.confirmation.pipe(take(1)).subscribe((confirmation: boolean) => {
             if (confirmation) {
                 this.store.dispatch(new fromEmployees.EmployeeDelete({ employee }))

@@ -7,16 +7,17 @@ import { Subject } from 'rxjs'
     templateUrl: './confirm-modal.component.html',
     styleUrls: ['./confirm-modal.component.scss']
 })
-export class ConfirmModalComponent implements OnInit {
+export class ConfirmModalComponent {
 
     confirmation: Subject<boolean> = new Subject()
 
-    constructor(public modalRef: MDBModalRef) { }
+    heading: string
+    content: string
+    constructor(
+        public modalRef: MDBModalRef
+    ) { }
 
-    ngOnInit() {
-    }
-
-    onDelete() {
+    onContirm() {
         this.confirmation.next(true)
         this.modalRef.hide()
     }

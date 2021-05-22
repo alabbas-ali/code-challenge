@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    API_HOST: '/api/v1',
+    API_HOST: 'https://dummy.restapiexample.com/api/v1',
 }
 
 /*

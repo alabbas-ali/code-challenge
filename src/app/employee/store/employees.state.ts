@@ -3,7 +3,7 @@ import { Employee } from '../model/employee'
 export interface EmployeesState {
     list: Array<Employee> | null;
     loading: boolean;
-    error: boolean;
+    error: any;
 }
 
 export const EmployeesInitialState: EmployeesState = {

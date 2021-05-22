@@ -12,40 +12,48 @@ import { EmployeesState } from './employees.state'
 @Injectable()
 export class EmployeesEffects {
 
-
-
     @Effect()
     query$ = this.actions$.pipe(
         ofType(EmployeesActionTypes.EMPLOYEES_QUERY),
-        switchMap(() => this.employeeService.getAll()
+        switchMap(() => this.employeeService
+            .getAll()
             .pipe(
-                map(employees => (new fromEmployees.EmployeesLoaded({ list: employees })),
-                    catchError(error => of(new fromEmployees.EmployeesError({ error })))
-                ))),
+                map(employees => (new fromEmployees.EmployeesLoaded({ list: employees }))),
+                catchError(error => {
+                    this.store.dispatch(new fromEmployees.EmployeesError({ error: `Error in retrieving Employees ${error.message}` }))
+                    return of(null)
+                })
+            )),
     )
 
     @Effect({ dispatch: false })
     save$ = this.actions$.pipe(
         ofType(EmployeesActionTypes.EMPLOYEE_SAVE),
         map((action: fromEmployees.EmployeeSave) => action.payload),
-        switchMap((payload: any) => this.employeeService.save(payload.employee)
-            .pipe(map(employee => this.store.dispatch(new fromEmployees.EmployeeSaved({ employee })),
-                catchError(error => of(new fromEmployees.EmployeesError({ error })))
-            )))
+        switchMap((payload: any) => this.employeeService
+            .save(payload.employee)
+            .pipe(
+                map(employee => this.store.dispatch(new fromEmployees.EmployeeSaved({ employee }))),
+                catchError(error => {
+                    this.store.dispatch(new fromEmployees.EmployeesError({ error: `Error in saving the Employee ${error.message}` }))
+                    return of(null)
+                })
+            ))
     )
 
     @Effect({ dispatch: false })
     delete$ = this.actions$.pipe(
         ofType(EmployeesActionTypes.EMPLOYEE_DELETE),
         map((action: fromEmployees.EmployeeDelete) => action.payload),
-        switchMap((payload: any) => this.employeeService.delete(payload.employee)
-            .pipe(map(deleted => {
-                if (deleted)
-                {return this.store.dispatch(new fromEmployees.EmployeeDeleted({ employee: payload.employee }))}
-                else {return}
-            },
-            catchError(error => of(new fromEmployees.EmployeesError({ error })))
-            )))
+        switchMap((payload: any) => this.employeeService
+            .delete(payload.employee)
+            .pipe(
+                map(() => this.store.dispatch(new fromEmployees.EmployeeDeleted({ employee: payload.employee }))),
+                catchError(error => {
+                    this.store.dispatch(new fromEmployees.EmployeesError({ error: `Error in deleting the Employee ${error.message}` }))
+                    return of(null)
+                })
+            ))
     )
 
     constructor(
