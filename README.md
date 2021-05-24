@@ -6,7 +6,7 @@ The Project is an example of using REST-API `http://dummy.restapiexample.com/` t
 
 This project is Hosted publiclly free AWS under `https://codechallenge.club/`  
 
-The application is using the tsconfig to define some application patches for including shortening
+The application is using the tsconfig to define some application pathes for including shortening
 
 ## Libraries
 
